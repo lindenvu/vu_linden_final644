@@ -126,8 +126,6 @@ var step1FormJSON =
 
 var step1Validated = true;
 
-window.alert(step1FormJSON[step1FormArray[7]].invalidID);
-
 var step1Validate = function () {
     "use strict";
     window.alert("step1Validate function started");
@@ -141,24 +139,34 @@ var step1Validate = function () {
     for (y = 0; y < step1FormArray.length; y += 1) {
         if (step1FormJSON[step1FormArray[y]].required === "true") {
             if ($(step1FormJSON[step1FormArray[y]].formID).value === "") {
-                window.alert("required and empty: " + step1FormJSON[step1FormArray[y]].formID);
-                $(step1FormJSON[step1FormArray[y]].invalidID).classList.toggle("hide-me");
+                //window.alert("required and empty: " + step1FormJSON[step1FormArray[y]].formID);
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                step1Validated = false;
+            }
+        }
+        if (step1FormJSON[step1FormArray[y]].checkForName === "true") {
+            var regNumbers = new RegExp('[0-9]');
+            if ($(regNumbers.test($(step1FormJSON[step1FormArray[y]].formID).value))) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
                 step1Validated = false;
             }
         }
     }
+    window.alert("step1Validate function step 3 started");
+    
+    
 
     window.alert(
-        $("step1-name").value + "\n" +
-            $("step1-address-type").value + "\n" +
-            $("step1-address-1").value + "\n" +
-            $("step1-address-2").value + "\n" +
-            $("step1-other-address").value + "\n" +
-            $("step1-city").value + "\n" +
-            $("step1-state").value + "\n" +
-            $("step1-zip").value + "\n" +
-            $("step1-tel").value + "\n" +
-            $("step1-email").value + "\n"
+        "Name: " + $("step1-name").value + "\n" +
+            "Address Type: " + $("step1-address-type").value + "\n" +
+            "Address1: " + $("step1-address-1").value + "\n" +
+            "Address2: " + $("step1-address-2").value + "\n" +
+            "Other: " + $("step1-other-address").value + "\n" +
+            "City: " + $("step1-city").value + "\n" +
+            "State: " + $("step1-state").value + "\n" +
+            "Zip: " + $("step1-zip").value + "\n" +
+            "Tel: " + $("step1-tel").value + "\n" +
+            "Email: " + $("step1-email").value + "\n"
     );
     window.alert("step1Validate function finished");
     return step1Validated;
@@ -175,12 +183,20 @@ var step1Process = function () {
     } else {
         step1Validated = true;
     }
-    window.alert("");
     window.alert("step1Process function finished");
     return false;
 };
 
-
+var step1AddressTypeProcess = function () {
+    "use strict";
+    step1FormJSON["other-address"].required = "false";
+    $("step1-other-adress-div").className = "hide-me";
+    if ($("step1-address-type").value === "Other") {
+        $("step1-other-adress-div").classList.toggle("hide-me");
+        step1FormJSON["other-address"].required = "true";
+    }
+    return false;
+};
 
 var step2Validate = function () {
     "use strict";
@@ -208,6 +224,7 @@ var init = function () {
     "use strict";
     window.alert("init function exected");
     $("step1-btn").onclick = step1Process;
+    $("step1-address-type").onchange = step1AddressTypeProcess;
     $("step2-btn").onclick = step2Process;
     $("step3-btn").onclick = step3Process;
     $("step2").classList.toggle("hide-me");
