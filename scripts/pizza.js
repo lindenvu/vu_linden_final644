@@ -131,59 +131,47 @@ var step1Validate = function () {
     window.alert("step1Validate function started");
     var x, y;
     for (x = 0; x < step1FormArray.length; x += 1) {
-        //window.alert("Reset loop started: " + step1FormJSON[step1FormArray[x]].invalidID);
-        $(step1FormJSON[step1FormArray[x]].invalidID).className = "invalid-feedback hide-me";
-        //window.alert("classname loop ended: " + step1FormJSON[step1FormArray[x]].invalidID);
+        $(step1FormJSON[step1FormArray[x]].invalidID).className = "invalid-input hide-me";
     }
-    window.alert("step1Validate function step 2 started");
     for (y = 0; y < step1FormArray.length; y += 1) {
-        window.alert("Validate loop started: " + step1FormJSON[step1FormArray[y]].formID);
         if (step1FormJSON[step1FormArray[y]].required === "true") {
             if ($(step1FormJSON[step1FormArray[y]].formID).value === "") {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForName === "true") {
-            window.alert("Check for Name True");
             if (/[0-9]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForState === "true") {
-            window.alert("Check for State True");
-            if (!/^([Aa][LKSZRAEPlkszraep]|[Cc][AOTaot]|[Dd][ECec]|[Ff][LMlm]|[Gg][AUau]|[Hh][Ii]|[Ii][ADLNadln]|[Kk][SYsy]|[Ll][Aa]|[Mm][ADEHINOPSTadehinopst]|[Nn][CDEHJMVYcdehjmvy]|[Oo][HKRhkr]|[Pp][ARWarw]|[Rr][Ii]|[Ss][CDcd]|[Tt][NXnx]|[Uu][Tt]|[Vv][AITait]|[Ww][AIVYaivy])$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+            if (!/^(AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForZip === "true") {
-            window.alert("Check for Zip True");
             if (!/^[0-9][0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForTel === "true") {
-            window.alert("Check for Zip True");
             if (!/^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForEmail === "true") {
-            window.alert("Check for Zip True");
             if (!/.+\@.+\.[com|net|edu|gov]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
                 step1Validated = false;
             }
         }
     }
-    window.alert("step1Validate function step 3 started");
     
-    
-
     window.alert(
         "Name: " + $("step1-name").value + "\n" +
             "Address Type: " + $("step1-address-type").value + "\n" +
@@ -208,6 +196,8 @@ var step1Process = function () {
         $("step1-form").classList.toggle("hide-me");
         $("step2").classList.toggle("hide-me");
         $("step2-form").classList.toggle("hide-me");
+        $("pizza-price").classList.toggle("hide-me");
+        
     } else {
         step1Validated = true;
     }
@@ -226,16 +216,134 @@ var step1AddressTypeProcess = function () {
     return false;
 };
 
+
+var crustPrices =
+    {
+        "Hand Tossed Crust": ["Small ($9.99)", "Medium ($12.99)", "Large ($14.99)"],
+        "Thin Crust": ["Medium ($11.99)", "Large ($13.99)"],
+        "New York Style Crust": ["Large ($16.99)", "Extra Large ($19.99)"],
+        "Gluten Free Crust": ["Small ($10.99)"]
+    };
+
+var crustValues =
+    {
+        "Hand Tossed Crust": ["9.99", "12.99", "14.99"],
+        "Thin Crust": ["11.99", "13.99"],
+        "New York Style Crust": ["16.99", "19.99"],
+        "Gluten Free Crust": ["10.99"]
+    };
+
+var crustChoice = false, sizePrices, sizeValues, z, a;
+
+var step2CheckCrustChoice = function () {"use strict"; if (!crustChoice) {window.alert("Please choose a crust type first"); return false; } else { return true; } };
+
 var step2Validate = function () {
     "use strict";
+    $("step2-crust-type-invalid").className = "invalid-input hide-me";
+    if (crustChoice) {
+        var totalPrice = 0;
+        var step2ToppingsCheckBoxes = document.getElementsByClassName("toppings"), b;
+        for (b = 0; b < step2ToppingsCheckBoxes.length; b += 1) {
+            if (step2ToppingsCheckBoxes[b].checked) {
+                totalPrice += 0.99;
+            }
+        }
+        totalPrice = totalPrice +
+            parseFloat($("step2-size-choice").options[$("step2-size-choice").selectedIndex].getAttribute("price")) + parseFloat($("step2-cheese-choice").options[$("step2-cheese-choice").selectedIndex].getAttribute("price"))
+            + parseFloat($("step2-sauce-choice").options[$("step2-sauce-choice").selectedIndex].getAttribute("price"));
+        $("totalPrice").innerHTML = "$" + totalPrice.toFixed(2);
+    } else {
+        $("step2-crust-type-invalid").classList.toggle("hide-me");
+    }
+};
+
+var step2CrustChoiceProcess = function () {
+    "use strict";
+    crustChoice = true;
+    $("crustPrice").innerHTML = this.value;
+    for (a = $("step2-size-choice").length - 1; a >= 0; a -= 1) {
+        $("step2-size-choice").remove(a);
+    }
+    
+    sizePrices = crustPrices[this.value];
+    sizeValues = crustValues[this.value];
+    for (z = 0; z < sizePrices.length; z += 1) {
+        var option = document.createElement("option");
+        option.text = sizePrices[z];
+        option.setAttribute("price", sizeValues[z]);
+        $("step2-size-choice").add(option);
+    }
+    $("sizePrice").innerHTML = $("step2-size-choice").options[$("step2-size-choice").selectedIndex].value;
+    $("cheesePrice").innerHTML = $("step2-cheese-choice").options[$("step2-cheese-choice").selectedIndex].value;
+    $("saucePrice").innerHTML = $("step2-sauce-choice").options[$("step2-sauce-choice").selectedIndex].value;
+    step2Validate();
+    return false;
+};
+
+var step2SizeChoiceProcess = function () {
+    "use strict";
+    $("sizePrice").innerHTML = $("step2-size-choice").options[$("step2-size-choice").selectedIndex].value;
+    step2Validate();
+    return false;
+};
+
+var step2CheeseChoiceProcess = function () {
+    "use strict";
+    $("cheesePrice").innerHTML = $("step2-cheese-choice").options[$("step2-cheese-choice").selectedIndex].value;
+    step2Validate();
+    return false;
+};
+
+var step2SauceChoiceProcess = function () {
+    "use strict";
+    $("saucePrice").innerHTML = $("step2-sauce-choice").options[$("step2-sauce-choice").selectedIndex].value;
+    step2Validate();
+    return false;
+};
+
+var step2ToppingsChoiceProcess = function () {
+    "use strict";
+    if (this.checked) {
+        $("toppingsPrice").innerHTML += document.querySelector("#" + this.id + "+ label").innerText;
+        $("toppingsPrice").innerHTML += "<br>";
+        step2Validate();
+    } else {
+        $("toppingsPrice").innerHTML = $("toppingsPrice").innerHTML.replace(document.querySelector("#" + this.id + "+ label").innerText + "<br>", "");
+        step2Validate();
+    }
     return false;
 };
 
 var step2Process = function () {
     "use strict";
+    window.alert("step2Process function started");
     step2Validate();
+    if (step2CheckCrustChoice()) {
+        if (window.confirm("You've clicked finished building pizza, would you like proceed to payment info?")) {
+            $("step2").innerHTML = "Return to Step 2: Build Your Pizza";
+            $("step2-form").classList.toggle("hide-me");
+            $("step3").classList.toggle("hide-me");
+            $("step3-form").classList.toggle("hide-me");
+        }
+    }
+    window.alert("step2Process function finished");
     return false;
 };
+
+var sameDeliveryProcess = function () {
+    "use strict";
+    if (this.checked) {
+        $("step3-name").value = $("step1-name").value;
+        $("step3-address-type").value = $("step1-address-type").value;
+        $("step3-address-1").value = $("step1-address-1").value;
+        $("step3-address-2").value = $("step1-address-2").value;
+        $("step3-city").value = $("step1-city").value;
+        $("step3-state").value = $("step1-state").value;
+        $("step3-zip").value = $("step1-zip").value;
+    }
+    return false;
+};
+
 
 var step3Validate = function () {
     "use strict";
@@ -254,11 +362,30 @@ var init = function () {
     $("step1-btn").onclick = step1Process;
     $("step1-address-type").onchange = step1AddressTypeProcess;
     $("step2-btn").onclick = step2Process;
+    $("step2-hand-tossed").onchange = step2CrustChoiceProcess;
+    $("step2-thin").onchange = step2CrustChoiceProcess;
+    $("step2-new-york").onchange = step2CrustChoiceProcess;
+    $("step2-gluten-free").onchange = step2CrustChoiceProcess;
+    $("step2-size-choice").onchange = step2SizeChoiceProcess;
+    $("step2-cheese-choice").onchange = step2CheeseChoiceProcess;
+    $("step2-sauce-choice").onchange = step2SauceChoiceProcess;
+    $("step2-size-choice").onclick = step2CheckCrustChoice;
+    $("step2-cheese-choice").onclick = step2CheckCrustChoice;
+    $("step2-sauce-choice").onclick = step2CheckCrustChoice;
+    var step2ToppingsCheckBoxes = document.getElementsByClassName("toppings"), b;
+    for (b = 0; b < step2ToppingsCheckBoxes.length; b += 1) {
+        step2ToppingsCheckBoxes[b].onchange = step2ToppingsChoiceProcess;
+        step2ToppingsCheckBoxes[b].onclick = step2CheckCrustChoice;
+    }
     $("step3-btn").onclick = step3Process;
+    $("step3-same-billing-address").onchange = sameDeliveryProcess;
+    
+    
     $("step2").classList.toggle("hide-me");
     $("step2-form").classList.toggle("hide-me");
-    $("step3").classList.toggle("hide-me");
-    $("step3-form").classList.toggle("hide-me");
+    $("pizza-price").classList.toggle("hide-me");
+    //$("step3").classList.toggle("hide-me");
+   // $("step3-form").classList.toggle("hide-me");
     window.alert("init function finished");
 };
 

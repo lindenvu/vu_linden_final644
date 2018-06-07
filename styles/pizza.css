@@ -1,7 +1,13 @@
-.invalid-feedback {
+.invalid-input {
     color:red;
 }
 
 .hide-me {
     display:none;
+}
+#pizza-options {
+    float: left;
+}
+#pizza-price {
+    float: right;
 }

@@ -12,21 +12,21 @@
 </head>
  
 
-<body class="bg-light">
+<body>
 <div>
 
     <h4 id="step1">Step 1: Enter Your Delivery Address</h4>
-    <form class="needs-validation" id="step1-form">
+    <form id="step1-form">
 
-    <div class="">
+    <div>
         <label for="step1-name">Full Name</label>
-        <input type="text" class="form-control" id="step1-name" placeholder="">
-        <div class="invalid-feedback hide-me" id="step1-name-invalid">Valid name is required.</div>
+        <input type="text" id="step1-name">
+        <div class="invalid-input hide-me" id="step1-name-invalid">Valid name is required.</div>
     </div>
 
-    <div class="">
+    <div>
         <label for="step1-address-type">Address Type</label>
-        <select class="custom-select" id="step1-address-type">
+        <select id="step1-address-type">
             <option value="">Choose...</option>
             <option>House</option>
             <option>Apartment</option>
@@ -35,60 +35,59 @@
             <option>Dorm</option>
             <option>Other</option>                       
         </select>
-        <div class="invalid-feedback hide-me" id="step1-address-type-invalid">Please select a valid address type.</div>
+        <div class="invalid-input hide-me" id="step1-address-type-invalid">Please select a valid address type.</div>
     </div>
 
-    <div class="">
+    <div>
         <label for="step1-address-1">Delivery Address 1</label>
-        <input type="text" class="form-control" id="step1-address-1" placeholder="1234 Main St">
-        <div class="invalid-feedback hide-me" id="step1-address-1-invalid">Please enter your delivery address.</div>
+        <input type="text" id="step1-address-1" placeholder="1234 Main St">
+        <div class="invalid-input hide-me" id="step1-address-1-invalid">Please enter your delivery address.</div>
     </div>
 
-    <div class="">
-        <label for="step1-address-2">Delivery Address 2 <span class="text-muted">(Optional)</span></label>
-        <input type="text" class="form-control" id="step1-address-2" placeholder="Apartment, suite or room #">
-        <div class="invalid-feedback hide-me" id="step1-address-2-invalid">Please enter valid unit information.</div>
+    <div>
+        <label for="step1-address-2">Delivery Address 2 <span>(Optional)</span></label>
+        <input type="text" id="step1-address-2" placeholder="Apartment, suite or room #">
+        <div class="invalid-input hide-me" id="step1-address-2-invalid">Please enter valid unit information.</div>
     </div>
     
     <div class="hide-me" id="step1-other-adress-div">
         <label for="step1-other-address">Other Address</label>
-        <input type="text" class="form-control" id="step1-other-address" >
-        <div class="invalid-feedback hide-me" id="step1-other-address-invalid">Please input valid other address info.</div>
+        <input type="text" id="step1-other-address" >
+        <div class="invalid-input hide-me" id="step1-other-address-invalid">Please input valid other address info.</div>
     </div>
 
 
-    <div class="row">
-
-        <div class="col-md-4">
+    <div>
+        <div>
             <label for="step1-city">City</label>
-            <input type="text" class="form-control" id="step1-city" >
-            <div class="invalid-feedback hide-me" id="step1-city-invalid">Please input a valid city.</div>
+            <input type="text" id="step1-city" >
+            <div class="invalid-input hide-me" id="step1-city-invalid">Please input a valid city.</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step1-state">State</label>
-            <input type="text" class="form-control" id="step1-state" >
-            <div class="invalid-feedback hide-me" id="step1-state-invalid">Please input a valid state in format CA, ca, or Ca.</div>
+            <input type="text" id="step1-state" >
+            <div class="invalid-input hide-me" id="step1-state-invalid">Please input a valid state as 2 captialized letter abbreviation format, ie CA</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step1-zip">Zip</label>
-            <input type="text" class="form-control" id="step1-zip">
-            <div class="invalid-feedback hide-me" id="step1-zip-invalid">Please enter valid 5 digit Zip code ie 98754.</div>
+            <input type="text" id="step1-zip">
+            <div class="invalid-input hide-me" id="step1-zip-invalid">Please enter valid 5 digit Zip code ie 98754.</div>
         </div>
 
     </div>
 
-    <div class="">
+    <div>
         <label for="step1-tel">Phone</label>
-        <input type="tel" class="form-control" id="step1-tel" placeholder="987-654-3210">
-        <div class="invalid-feedback hide-me" id="step1-tel-invalid">Please enter a valid phone # in format 987-654-3210.</div>
+        <input type="tel" id="step1-tel" placeholder="987-654-3210">
+        <div class="invalid-input hide-me" id="step1-tel-invalid">Please enter a valid phone # in format 987-654-3210.</div>
     </div>
 
-    <div class="">
+    <div>
         <label for="step1-email">Email</label>
-        <input type="email" class="form-control" id="step1-email" placeholder="you@example.com">
-        <div class="invalid-feedback hide-me" id="step1-email-invalid">Please enter a valid email address.</div>
+        <input type="email" id="step1-email" placeholder="you@example.com">
+        <div class="invalid-input hide-me" id="step1-email-invalid">Please enter a valid email address.</div>
     </div>
 
 
@@ -101,121 +100,137 @@
 <div>
 
     <h4 id="step2">Step 2: Build Your Pizza</h4>
-    <form class="needs-validation"  id="step2-form">
-    <div class="">
-        <h6>Choose your crust</h6>
-        <div class="custom-control custom-radio">
-            <input id="step2-hand-tossed" name="crust-choice" type="radio" class="custom-control-input">
-            <label class="custom-control-label" for="step2-hand-tossed">Hand Tossed Crust</label>
+    <div id="pizza-options">
+        <form id="step2-form">
+        <div>
+            <h4>Choose your crust type</h4>
+            <div>
+                <input id="step2-hand-tossed" name="crust-choice" type="radio" value="Hand Tossed Crust">
+                <label for="step2-hand-tossed">Hand Tossed Crust</label>
+            </div>
+            <div>
+                <input id="step2-thin" name="crust-choice" type="radio" value="Thin Crust">
+                <label for="step2-thin">Thin Crust</label>
+            </div>
+            <div>
+                <input id="step2-new-york" name="crust-choice" type="radio" value="New York Style Crust">
+                <label for="step2-new-york">New York Style Crust</label>
+            </div>
+            <div>
+                <input id="step2-gluten-free" name="crust-choice" type="radio" value="Gluten Free Crust">
+                <label for="step2-gluten-free">Gluten Free Crust</label>
+            </div>
         </div>
-        <div class="custom-control custom-radio">
-            <input id="step2-thin" name="crust-choice" type="radio" class="custom-control-input">
-            <label class="custom-control-label" for="step2-thin">Thin Crust</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input id="step2-new-york" name="crust-choice" type="radio" class="custom-control-input">
-            <label class="custom-control-label" for="step2-new-york">New York Style Crust</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input id="step2-gluten-free" name="crust-choice" type="radio" class="custom-control-input">
-            <label class="custom-control-label" for="step2-gluten-free">Gluten Free Crust</label>
-        </div>
-    </div>
-    <hr>
-   
-    <div class="">
-        <label for="step2-cheese-choice">Choose your cheese</label>
-        <select class="custom-select" id="step2-cheese-choice">
-            <option>Light Cheese (no extra charge)</option>
-            <option>Normal Cheese (no extra charge)</option>
-            <option>Extra Cheese (+$2.99)</option>
-            <option>Double Cheese (+$3.99)</option>
-        </select>
-    </div>
-    <hr>
-   
-    <div class="">
-        <label for="step2-sauce-choice">Choose your sauce</label>
-        <select class="custom-select" id="step2-sauce-choice">
-            <option>Regular Tomato Sauce (no extra charge)</option>
-            <option>Hearty Tomato Sauce (+$0.99)</option>
-            <option>BBQ Sauce (+$1.99)</option>
-        </select>
-    </div>
-    <hr>
-    <h6>Choose your toppings (+$0.99 each)</h6>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-pepperoni">
-    <label class="custom-control-label" for="step2-pepperoni">pepperoni</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-sausage">
-    <label class="custom-control-label" for="step2-sausage">sausage</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-ham">
-    <label class="custom-control-label" for="step2-ham">ham</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-bacon">
-    <label class="custom-control-label" for="step2-bacon">bacon</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-salami">
-    <label class="custom-control-label" for="step2-salami">salami</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-peppers">
-    <label class="custom-control-label" for="step2-peppers">peppers</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-olives">
-    <label class="custom-control-label" for="step2-olives">olives</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-jalapenos">
-    <label class="custom-control-label" for="step2-jalapenos">jalapenos</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-mushrooms">
-    <label class="custom-control-label" for="step2-mushrooms">mushrooms</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-pineapple">
-    <label class="custom-control-label" for="step2-pineapple">pineapple</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step2-onion">
-    <label class="custom-control-label" for="step2-onion">onion</label>
-    </div>
-    
-    <hr class="">
-    <button id="step2-btn" type="submit">Finished Building Your Pizza</button>
-    </form>
+        <hr>
 
+        <div>
+            <label for="step2-size-choice">Choose your pizza size</label>
+            <select id="step2-size-choice">
+            </select>
+        </div>
+       
+       
+        <div>
+            <label for="step2-cheese-choice">Choose your cheese</label>
+            <select id="step2-cheese-choice">
+                <option>Light Cheese (no extra charge)</option>
+                <option>Normal Cheese (no extra charge)</option>
+                <option>Extra Cheese (+$2.99)</option>
+                <option>Double Cheese (+$3.99)</option>
+            </select>
+        </div>
+        <hr>
+
+        <div>
+            <label for="step2-sauce-choice">Choose your sauce</label>
+            <select id="step2-sauce-choice">
+                <option>Regular Tomato Sauce (no extra charge)</option>
+                <option>Hearty Tomato Sauce (+$0.99)</option>
+                <option>BBQ Sauce (+$1.99)</option>
+            </select>
+        </div>
+        <hr>
+        <h4>Choose your toppings (+$0.99 each)</h4>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-pepperoni">
+        <label for="step2-pepperoni">pepperoni</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-sausage">
+        <label for="step2-sausage">sausage</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-ham">
+        <label for="step2-ham">ham</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-bacon">
+        <label for="step2-bacon">bacon</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-salami">
+        <label for="step2-salami">salami</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-peppers">
+        <label for="step2-peppers">peppers</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-olives">
+        <label for="step2-olives">olives</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-jalapenos">
+        <label for="step2-jalapenos">jalapenos</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-mushrooms">
+        <label for="step2-mushrooms">mushrooms</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-pineapple">
+        <label for="step2-pineapple">pineapple</label>
+        </div>
+        <div>
+        <input type="checkbox" class="toppings"id ="step2-onion">
+        <label for="step2-onion">onion</label>
+        </div>
+
+        <hr class="">
+        <button id="step2-btn" type="submit">Finished Building Your Pizza</button>
+        </form>
+    </div>
+    <div id="pizza-price">
+        <h4>Total Pizza Price <span id="totalPrice"></span></h4>
+        <div>Crust Choice: <span id="crustPrice"></span></div>
+        <div>Size Price: <span id="sizePrice"></span></div>
+        <div>Cheese Price: <span id="cheesePrice"></span></div>
+        <div>Suace Price: <span id="saucePrice"></span></div>
+        <div>Toppings Price: <span id="toppingsPrice"></span></div>
+    </div>
 </div>
 
 
 <div>
 
     <h4 id="step3">Step 3: Enter Your Payment Info</h4>
-    <form class="needs-validation" id="step3-form">
+    <form id="step3-form">
     
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="step3-same-billing-address">
-    <label class="custom-control-label" for="step3-same-billing-address">Same as delivery information</label>
+    <div>
+    <input type="checkbox" id ="step3-same-billing-address">
+    <label for="step3-same-billing-address">Same as delivery information</label>
     </div>
     <hr>
     
-    <div class="">
+    <div>
         <label for="step3-name">Full Name</label>
-        <input type="text" class="form-control" id="step3-name" placeholder="">
-        <div class="invalid-feedback hide-me">Valid name is required.</div>
+        <input type="text" id="step3-name">
+        <div class="invalid-input hide-me">Valid name is required.</div>
     </div>
 
-    <div class="">
+    <div>
         <label for="step3-address-type">Address Type</label>
-        <select class="custom-select" id="step3-address-type">
+        <select id="step3-address-type">
             <option value="">Choose...</option>
             <option>House</option>
             <option>Apartment</option>
@@ -223,40 +238,40 @@
             <option>Hotel</option>
             <option>Dorm</option>                     
         </select>
-        <div class="invalid-feedback hide-me">Please select a valid adress type.</div>
+        <div class="invalid-input hide-me">Please select a valid adress type.</div>
     </div>
 
-    <div class="">
+    <div>
         <label for="step3-address-1">Billing Address 1</label>
-        <input type="text" class="form-control" id="step3-address-1" placeholder="1234 Main St">
-        <div class="invalid-feedback hide-me">Please enter your delivery address.</div>
+        <input type="text" id="step3-address-1" placeholder="1234 Main St">
+        <div class="invalid-input hide-me">Please enter your delivery address.</div>
     </div>
 
-    <div class="">
-        <label for="step3-address-2">Biling Address 2 <span class="text-muted">(Optional)</span></label>
-        <input type="text" class="form-control" id="step3-address-2" placeholder="Apartment, suite or room #">
+    <div>
+        <label for="step3-address-2">Biling Address 2 <span>(Optional)</span></label>
+        <input type="text" id="step3-address-2" placeholder="Apartment, suite or room #">
     </div>
 
 
 
-    <div class="row">
+    <div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step3-city">City</label>
             <input type="text" class="form-control" id="step3-city" >
-            <div class="invalid-feedback hide-me">Please input a valid city.</div>
+            <div class="invalid-input hide-me">Please input a valid city.</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step3-state">State</label>
             <input type="text" class="form-control" id="step3-state" placeholder="CA">
-            <div class="invalid-feedback hide-me">Please input a valid abbreviated stae ie CA, ca, or Ca.</div>
+            <div class="invalid-input hide-me">Please input a valid state as 2 captialized letter abbreviation format, ie CA</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step3-zip">Zip</label>
             <input type="text" class="form-control" id="step3-zip" placeholder="98765">
-            <div class="invalid-feedback hide-me">Please enter valid 5 digit Zip code ie 98754.</div>
+            <div class="invalid-input hide-me">Please enter valid 5 digit Zip code ie 98754.</div>
         </div>
 
     </div>
@@ -269,28 +284,29 @@
         <div class="col-md-4">
             <label for="step3-credit-card">Credit Card Number</label>
             <input type="text" class="form-control" id="step3-credit-card" >
-            <div class="invalid-feedback hide-me">Credit card number is required.</div>
+            <div class="invalid-input hide-me">Credit card number is required.</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step3-expiration-date">Expiration Date</label>
-            <input type="text" class="form-control" id="step3-expiration-date" >
-            <div class="invalid-feedback hide-me">Expiration date required</div>
+            <input type="text" id="step3-expiration-date" >
+            <div class="invalid-input hide-me">Expiration date required</div>
         </div>
 
-        <div class="col-md-4">
+        <div>
             <label for="step3-cvc-code">CVC Code</label>
-            <input type="text" class="form-control" id="step3-cvc-code">
-            <div class="invalid-feedback hide-me">Security Code required.</div>
+            <input type="text" id="step3-cvc-code">
+            <div class="invalid-input hide-me">Security Code required.</div>
         </div>
 
     </div>
     
-    <hr class="">
+    <hr>
     <button id="step3-btn" type="submit">Submit Your Order</button>
     </form>
 
 </div>
+
 
 <!-- Custom JS -->
     <script src="scripts/pizza.js"></script>
