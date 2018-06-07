@@ -299,46 +299,48 @@
 
         <div class="col-md-4">
             <label for="step3-credit-card">Credit Card Number</label>
-            <input type="text" class="form-control" id="step3-credit-card" >
-            <div class="invalid-input hide-me">Credit card number is required.</div>
+            <input type="text" class="form-control" id="step3-credit-card">
+            <div class="invalid-input hide-me" id="step3-credit-card-invalid" >Valid Credit Card number is required: </div>
         </div>
 
         <div class="col-md-2">
         <label for="step3-expiration-month">Expiration Month</label>
         <select class="custom-select" id="step3-expiration-month">
             <option value="">Choose...</option>
-            <option>Jan</option>
-            <option>Feb</option>
-            <option>Mar</option>
-            <option>Apr</option>
-            <option>May</option>
-            <option>June</option>
-            <option>July</option>
-            <option>Aug</option>
-            <option>Sep</option>
-            <option>Oct</option>
-            <option>Nov</option>
-            <option>Dec</option>                       
+            <option value="0">Jan</option>
+            <option value="1">Feb</option>
+            <option value="2">Mar</option>
+            <option value="3">Apr</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">Aug</option>
+            <option value="8">Sep</option>
+            <option value="9">Oct</option>
+            <option value="10">Nov</option>
+            <option value="11">Dec</option>                       
         </select>
+        <div class="invalid-input hide-me" id="step3-expiration-month-invalid" >Valid Experiation Date is required.</div>
         </div>
 
         <div class="col-md-2">
         <label for="step3-expiration-year">Expiration Year</label>
         <select class="custom-select" id="step3-expiration-year">
             <option value="">Choose...</option>
-            <option>2018</option>
-            <option>2019</option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-            <option>2023</option>                 
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+                 
         </select>
+        <div class="invalid-input hide-me" id="step3-expiration-year-invalid" >Valid Experiation Date is required.</div>
         </div>
        
         <div class="col-md-4">
             <label for="step3-cvc-code">CVC Code</label>
             <input type="text" class="form-control" id="step3-cvc-code">
-            <div class="invalid-input hide-me">Security Code required.</div>
+            <div class="invalid-input hide-me" id="step3-cvc-code-invalid">Valid Security Code required.</div>
         </div>
 
     </div>
