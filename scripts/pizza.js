@@ -131,22 +131,50 @@ var step1Validate = function () {
     window.alert("step1Validate function started");
     var x, y;
     for (x = 0; x < step1FormArray.length; x += 1) {
-        //window.alert("classname loop started: " + step1FormJSON[step1FormArray[x]].invalidID);
+        //window.alert("Reset loop started: " + step1FormJSON[step1FormArray[x]].invalidID);
         $(step1FormJSON[step1FormArray[x]].invalidID).className = "invalid-feedback hide-me";
         //window.alert("classname loop ended: " + step1FormJSON[step1FormArray[x]].invalidID);
     }
     window.alert("step1Validate function step 2 started");
     for (y = 0; y < step1FormArray.length; y += 1) {
+        window.alert("Validate loop started: " + step1FormJSON[step1FormArray[y]].formID);
         if (step1FormJSON[step1FormArray[y]].required === "true") {
             if ($(step1FormJSON[step1FormArray[y]].formID).value === "") {
-                //window.alert("required and empty: " + step1FormJSON[step1FormArray[y]].formID);
                 $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
                 step1Validated = false;
             }
         }
         if (step1FormJSON[step1FormArray[y]].checkForName === "true") {
-            var regNumbers = new RegExp('[0-9]');
-            if ($(regNumbers.test($(step1FormJSON[step1FormArray[y]].formID).value))) {
+            window.alert("Check for Name True");
+            if (/[0-9]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                step1Validated = false;
+            }
+        }
+        if (step1FormJSON[step1FormArray[y]].checkForState === "true") {
+            window.alert("Check for State True");
+            if (!/^([Aa][LKSZRAEPlkszraep]|[Cc][AOTaot]|[Dd][ECec]|[Ff][LMlm]|[Gg][AUau]|[Hh][Ii]|[Ii][ADLNadln]|[Kk][SYsy]|[Ll][Aa]|[Mm][ADEHINOPSTadehinopst]|[Nn][CDEHJMVYcdehjmvy]|[Oo][HKRhkr]|[Pp][ARWarw]|[Rr][Ii]|[Ss][CDcd]|[Tt][NXnx]|[Uu][Tt]|[Vv][AITait]|[Ww][AIVYaivy])$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                step1Validated = false;
+            }
+        }
+        if (step1FormJSON[step1FormArray[y]].checkForZip === "true") {
+            window.alert("Check for Zip True");
+            if (!/^[0-9][0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                step1Validated = false;
+            }
+        }
+        if (step1FormJSON[step1FormArray[y]].checkForTel === "true") {
+            window.alert("Check for Zip True");
+            if (!/^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
+                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
+                step1Validated = false;
+            }
+        }
+        if (step1FormJSON[step1FormArray[y]].checkForEmail === "true") {
+            window.alert("Check for Zip True");
+            if (!/.+\@.+\.[com|net|edu|gov]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
                 $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-feedback";
                 step1Validated = false;
             }
