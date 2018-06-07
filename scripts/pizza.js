@@ -208,9 +208,9 @@ var step1Process = function () {
 var step1AddressTypeProcess = function () {
     "use strict";
     step1FormJSON["other-address"].required = "false";
-    $("step1-other-adress-div").className = "hide-me";
+    $("step1-other-address-div").className = "hide-me";
     if ($("step1-address-type").value === "Other") {
-        $("step1-other-adress-div").classList.toggle("hide-me");
+        $("step1-other-address-div").classList.toggle("hide-me");
         step1FormJSON["other-address"].required = "true";
     }
     return false;
@@ -337,6 +337,8 @@ var sameDeliveryProcess = function () {
         $("step3-address-type").value = $("step1-address-type").value;
         $("step3-address-1").value = $("step1-address-1").value;
         $("step3-address-2").value = $("step1-address-2").value;
+        $("step3-other-address").value = $("step1-other-address").value;
+        $("step3-other-address-div").setAttribute("class", $("step1-other-address-div").getAttribute("class"));
         $("step3-city").value = $("step1-city").value;
         $("step3-state").value = $("step1-state").value;
         $("step3-zip").value = $("step1-zip").value;

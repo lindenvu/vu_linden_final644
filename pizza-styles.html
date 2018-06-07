@@ -55,7 +55,7 @@
         <div class="invalid-input hide-me" id="step1-address-2-invalid">Please enter valid unit information.</div>
     </div>
     
-    <div class="hide-me" id="step1-other-adress-div">
+    <div class="hide-me" id="step1-address-type-div">
         <label for="step1-other-address">Other Address</label>
         <input type="text" class="form-control" id="step1-other-address" >
         <div class="invalid-input hide-me" id="step1-other-address-invalid">Please input valid other address info.</div>
@@ -235,7 +235,7 @@
     <div class="">
         <label for="step3-name">Full Name</label>
         <input type="text" class="form-control" id="step3-name" placeholder="">
-        <div class="invalid-input hide-me">Valid name is required.</div>
+        <div class="invalid-input hide-me" id="step3-name-invalid">Valid name is required.</div>
     </div>
 
     <div class="">
@@ -246,42 +246,48 @@
             <option>Apartment</option>
             <option>Campus</option>
             <option>Hotel</option>
-            <option>Dorm</option>                     
+            <option>Dorm</option>
+            <option>Other</option>                       
         </select>
-        <div class="invalid-input hide-me">Please select a valid adress type.</div>
+        <div class="invalid-input hide-me" id="step3-address-type-invalid">Please select a valid adress type.</div>
     </div>
 
     <div class="">
         <label for="step3-address-1">Billing Address 1</label>
         <input type="text" class="form-control" id="step3-address-1" placeholder="1234 Main St">
-        <div class="invalid-input hide-me">Please enter your delivery address.</div>
+        <div class="invalid-input hide-me" id="step3-address-1-invalid">Please enter your delivery address.</div>
     </div>
 
     <div class="">
         <label for="step3-address-2">Biling Address 2 <span class="text-muted">(Optional)</span></label>
         <input type="text" class="form-control" id="step3-address-2" placeholder="Apartment, suite or room #">
+        <div class="invalid-input hide-me" id="step3-address-2-invalid">Please enter valid unit information.</div>
     </div>
 
-
+    <div class="hide-me" id="step3-address-type-div">
+        <label for="step3-other-address">Other Address</label>
+        <input type="text" class="form-control" id="step3-other-address" >
+        <div class="invalid-input hide-me" id="step3-other-address-invalid">Please input valid other address info.</div>
+    </div>
 
     <div class="row">
 
         <div class="col-md-4">
             <label for="step3-city">City</label>
             <input type="text" class="form-control" id="step3-city" >
-            <div class="invalid-input hide-me">Please input a valid city.</div>
+            <div class="invalid-input hide-me" id="step3-city-invalid">Please input a valid city.</div>
         </div>
 
         <div class="col-md-4">
             <label for="step3-state">State</label>
             <input type="text" class="form-control" id="step3-state" placeholder="CA">
-            <div class="invalid-input hide-me">Please input a valid state as 2 captialized letter abbreviation format, ie CA</div>
+            <div class="invalid-input hide-me" id="step3-state-invalid">Please input a valid state as 2 captialized letter abbreviation format, ie CA</div>
         </div>
 
         <div class="col-md-4">
             <label for="step3-zip">Zip</label>
             <input type="text" class="form-control" id="step3-zip" placeholder="98765">
-            <div class="invalid-input hide-me">Please enter valid 5 digit Zip code ie 98754.</div>
+            <div class="invalid-input hide-me" id="step3-zip-invalid">Please enter valid 5 digit Zip code ie 98754.</div>
         </div>
 
     </div>
@@ -297,12 +303,38 @@
             <div class="invalid-input hide-me">Credit card number is required.</div>
         </div>
 
-        <div class="col-md-4">
-            <label for="step3-expiration-date">Expiration Date</label>
-            <input type="text" class="form-control" id="step3-expiration-date" >
-            <div class="invalid-input hide-me">Expiration date required</div>
+        <div class="col-md-2">
+        <label for="step3-expiration-month">Expiration Month</label>
+        <select class="custom-select" id="step3-expiration-month">
+            <option value="">Choose...</option>
+            <option>Jan</option>
+            <option>Feb</option>
+            <option>Mar</option>
+            <option>Apr</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>Aug</option>
+            <option>Sep</option>
+            <option>Oct</option>
+            <option>Nov</option>
+            <option>Dec</option>                       
+        </select>
         </div>
 
+        <div class="col-md-2">
+        <label for="step3-expiration-year">Expiration Year</label>
+        <select class="custom-select" id="step3-expiration-year">
+            <option value="">Choose...</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>                 
+        </select>
+        </div>
+       
         <div class="col-md-4">
             <label for="step3-cvc-code">CVC Code</label>
             <input type="text" class="form-control" id="step3-cvc-code">
@@ -325,6 +357,6 @@
 
 
 <!-- Custom JS -->
-    <script src="scripts/pizza.js"></script>
+    <script src="scripts/pizza2.js"></script>
 </body>
 </html>
