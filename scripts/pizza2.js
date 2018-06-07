@@ -60,7 +60,7 @@ var addressValidate = function (stepNum) {
         addressValidated = false;
     }
     //window.alert("Address Validate zip " + stepNum);
-    window.alert("Address Validate function finished for " + stepNum);
+    //window.alert("Address Validate function finished for " + stepNum);
     return addressValidated;
 };
 
@@ -91,8 +91,9 @@ var step1Process = function () {
     addressValidate("step1");
     contactValidate();
     if (addressValidate("step1") && contactValidate()) {
-        $("step1").innerHTML = "Return to Step 1: Enter Your Delivery Address";
+        $("step1").classList.toggle("hide-me");
         $("step1-form").classList.toggle("hide-me");
+        $("step1Return").classList.toggle("hide-me");
         $("step2").classList.toggle("hide-me");
         $("step2-form").classList.toggle("hide-me");
         $("pizza-price").classList.toggle("hide-me");
@@ -133,7 +134,7 @@ var crustValues =
         "Gluten Free Crust": ["10.99"]
     };
 
-var crustChoice = false, sizePrices, sizeValues;
+var crustChoice = false, sizePrices, sizeValues, finalPrice;
 
 var step2CheckCrustChoice = function () {"use strict"; if (!crustChoice) {window.alert("Please choose a crust type first"); return false; } else { return true; } };
 
@@ -152,6 +153,7 @@ var step2Validate = function () {
             parseFloat($("step2-size-choice").options[$("step2-size-choice").selectedIndex].getAttribute("price")) + parseFloat($("step2-cheese-choice").options[$("step2-cheese-choice").selectedIndex].getAttribute("price"))
             + parseFloat($("step2-sauce-choice").options[$("step2-sauce-choice").selectedIndex].getAttribute("price"));
         $("totalPrice").innerHTML = "$" + totalPrice.toFixed(2);
+        finalPrice = totalPrice;
     } else {
         $("step2-crust-type-invalid").classList.toggle("hide-me");
     }
@@ -222,8 +224,9 @@ var step2Process = function () {
     step2Validate();
     if (step2CheckCrustChoice()) {
         if (window.confirm("You've clicked finished building pizza, would you like proceed to payment info?")) {
-            $("step2").innerHTML = "Return to Step 2: Build Your Pizza";
+            $("step2").classList.toggle("hide-me");
             $("step2-form").classList.toggle("hide-me");
+            $("step2Return").classList.toggle("hide-me");
             $("step3").classList.toggle("hide-me");
             $("step3-form").classList.toggle("hide-me");
         }
@@ -274,7 +277,7 @@ var validateCC = function () {
                 doubleDigits = doubleDigits + (parseInt(CC[d] * 2, 10));
             } else { doubleDigits = doubleDigits + CC[d]; }
         }
-        window.alert(doubleDigits);
+        //window.alert(doubleDigits);
         for (c = 0; c < doubleDigits.length; c += 1) {
             checkSum += parseInt(doubleDigits[c], 10);
         }
@@ -293,7 +296,7 @@ var validateCC = function () {
         CCValidated = false;
         $("step3-credit-card-invalid").classList.toggle("hide-me");
         $("step3-credit-card-invalid").innerHTML += "Must be all #s, start with 4, 37 or 51-55, and be 13, 15, or 16 digits long. Please Re-enter CC #";
-        window.alert(CC + " failed precheck");
+        //window.alert(CC + " failed precheck");
     }
     
     var todayDate = new Date();
@@ -329,9 +332,47 @@ var step3Process = function () {
     addressValidate("step3");
     validateCC();
     if (addressValidate("step3") && validateCC()) {
-        window.alert("Your " + CCCompany + " card has been successfully processed. 1-2-3 Pizza is on it's way!");
+        $("step3").classList.toggle("hide-me");
+        $("step3-form").classList.toggle("hide-me");
+        $("step3Return").classList.toggle("hide-me");
+        //window.alert($("step4").innerHTML);
+        var msg = "Your " + CCCompany + " card has successfully been charged $" + finalPrice + ". 1-2-3 Pizza is on it's way!";
+        window.alert("Your " + CCCompany + " card has successfully been charged $" + finalPrice + ". 1-2-3 Pizza is on it's way!");
     }
     //window.alert("step3process function finished");
+    return false;
+};
+
+var step1Return = function () {
+    "use strict";
+    $("step1Return").className = "hide-me";
+    $("step2Return").className = "hide-me";
+    $("step3Return").className = "hide-me";
+    $("step1").className = "";
+    $("step2").className = "hide-me";
+    $("step3").className = "hide-me";
+    $("step1-form").className = "needs-validation";
+    $("step2-form").className = "needs-validation hide-me";
+    $("pizza-price").className = "hide-me";
+    $("step3-form").className = "needs-validation hide-me";
+    return false;
+};
+var step2Return = function () {
+    "use strict";
+    $("step2Return").className = "hide-me";
+    $("step3Return").className = "hide-me";
+    $("step2").className = "";
+    $("step3").className = "hide-me";
+    $("step2-form").className = "needs-validation";
+    $("pizza-price").className = "";
+    $("step3-form").className = "needs-validation hide-me";
+    return false;
+};
+var step3Return = function () {
+    "use strict";
+    $("step3Return").className = "hide-me";
+    $("step3").className = "";
+    $("step3-form").className = "needs-validation";
     return false;
 };
 
@@ -365,6 +406,9 @@ var init = function () {
     $("pizza-price").classList.toggle("hide-me");
     $("step3").classList.toggle("hide-me");
     $("step3-form").classList.toggle("hide-me");
+    $("step1Return").onclick = step1Return;
+    $("step2Return").onclick = step2Return;
+    $("step3Return").onclick = step3Return;
     //window.alert("init function finished");
 };
 
