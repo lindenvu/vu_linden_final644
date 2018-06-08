@@ -11,3 +11,8 @@
 #pizza-price {
     float: right;
 }
+.jumbotron {
+    background: url(../images/pizza.jpg) center;
+    color: white;
+    font-weight: bold;
+}

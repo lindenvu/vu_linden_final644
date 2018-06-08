@@ -4,215 +4,116 @@ var $ = function (id) {
     return window.document.getElementById(id);
 };
 
-/*
-var step1FormJSON;
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "../step1Form.json");
-xhr.send();
-xhr.onreadystatechange = function () {
-    "use strict";
-    if (this.readyState === 4 && this.status === 200) {
-        step1FormJSON = JSON.parse(this.responseText);
-    }
+var otherAddress = {
+    "step1-address-type": "false",
+    "step3-address-type": "false"
 };
 
-
-*/
-var step1FormArray = ["name", "address-type", "address-1", "address-2", "other-address", "city", "state", "zip", "tel", "email"];
-
-var step1FormJSON =
-    {
-        "name" : {
-            "formID" : "step1-name",
-            "invalidID" : "step1-name-invalid",
-            "required" : "true",
-            "checkForName" : "true",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "address-type" :  {
-            "formID" : "step1-address-type",
-            "invalidID" : "step1-address-type-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "address-1" :  {
-            "formID" : "step1-address-1",
-            "invalidID" : "step1-address-1-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "address-2" :  {
-            "formID" : "step1-address-2",
-            "invalidID" : "step1-address-2-invalid",
-            "required" : "false",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "other-address" :  {
-            "formID" : "step1-other-address",
-            "invalidID" : "step1-other-address-invalid",
-            "required" : "false",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "city" :  {
-            "formID" : "step1-city",
-            "invalidID" : "step1-city-invalid",
-            "required" : "true",
-            "checkForName" : "true",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "state" :  {
-            "formID" : "step1-state",
-            "invalidID" : "step1-state-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "true",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "zip" :  {
-            "formID" : "step1-zip",
-            "invalidID" : "step1-zip-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "true",
-            "checkForTel" : "false",
-            "checkForEmail" : "false"
-        },
-        "tel" :  {
-            "formID" : "step1-tel",
-            "invalidID" : "step1-tel-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "true",
-            "checkForEmail" : "false"
-        },
-        "email" :  {
-            "formID" : "step1-email",
-            "invalidID" : "step1-email-invalid",
-            "required" : "true",
-            "checkForName" : "false",
-            "checkForState" : "false",
-            "checkForZip" : "false",
-            "checkForTel" : "false",
-            "checkForEmail" : "true"
-        }
-    };
-
-var step1Validated = true;
-
-var step1Validate = function () {
+var addressValidate = function (stepNum) {
     "use strict";
-    window.alert("step1Validate function started");
-    var x, y;
-    for (x = 0; x < step1FormArray.length; x += 1) {
-        $(step1FormJSON[step1FormArray[x]].invalidID).className = "invalid-input hide-me";
-    }
-    for (y = 0; y < step1FormArray.length; y += 1) {
-        if (step1FormJSON[step1FormArray[y]].required === "true") {
-            if ($(step1FormJSON[step1FormArray[y]].formID).value === "") {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-        if (step1FormJSON[step1FormArray[y]].checkForName === "true") {
-            if (/[0-9]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-        if (step1FormJSON[step1FormArray[y]].checkForState === "true") {
-            if (!/^(AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-        if (step1FormJSON[step1FormArray[y]].checkForZip === "true") {
-            if (!/^[0-9][0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-        if (step1FormJSON[step1FormArray[y]].checkForTel === "true") {
-            if (!/^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-        if (step1FormJSON[step1FormArray[y]].checkForEmail === "true") {
-            if (!/.+\@.+\.[com|net|edu|gov]/.test($(step1FormJSON[step1FormArray[y]].formID).value)) {
-                $(step1FormJSON[step1FormArray[y]].invalidID).className = "invalid-input";
-                step1Validated = false;
-            }
-        }
-    }
     
-    window.alert(
-        "Name: " + $("step1-name").value + "\n" +
-            "Address Type: " + $("step1-address-type").value + "\n" +
-            "Address1: " + $("step1-address-1").value + "\n" +
-            "Address2: " + $("step1-address-2").value + "\n" +
-            "Other: " + $("step1-other-address").value + "\n" +
-            "City: " + $("step1-city").value + "\n" +
-            "State: " + $("step1-state").value + "\n" +
-            "Zip: " + $("step1-zip").value + "\n" +
-            "Tel: " + $("step1-tel").value + "\n" +
-            "Email: " + $("step1-email").value + "\n"
-    );
-    window.alert("step1Validate function finished");
-    return step1Validated;
+    var addressValidated = true, step = stepNum;
+    //window.alert("Address Validate function started for " + stepNum);
+    
+    $(stepNum + "-name-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-address-type-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-address-1-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-address-2-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-other-address-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-city-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-state-invalid").className = "invalid-input hide-me";
+    $(stepNum + "-zip-invalid").className = "invalid-input hide-me";
+    //window.alert("Address Validate reset " + stepNum);
+    if ($(stepNum + "-name").value === "" || /[0-9]/.test($(stepNum + "-name").value)) {
+        $(stepNum + "-name-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate name " + stepNum);
+    if ($(stepNum + "-address-type").value === "") {
+        $(stepNum + "-address-type-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate address type " + stepNum);
+    if ($(stepNum + "-address-1").value === "") {
+        $(stepNum + "-address-1-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate address 1 " + stepNum);
+    //window.alert(otherAddress[stepNum + "-address-type"]);
+    if ($(stepNum + "-other-address").value === "" && otherAddress[stepNum + "-address-type"] === "true") {
+        $(stepNum + "-other-address-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate other address " + stepNum);
+    if ($(stepNum + "-city").value === "") {
+        $(stepNum + "-city-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate city " + stepNum);
+    if (!/^(AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)$/.test($(stepNum + "-state").value)) {
+        $(stepNum + "-state-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate state " + stepNum);
+    if (!/^[0-9][0-9][0-9][0-9][0-9]$/.test($(stepNum + "-zip").value)) {
+        $(stepNum + "-zip-invalid").classList.toggle("hide-me");
+        addressValidated = false;
+    }
+    //window.alert("Address Validate zip " + stepNum);
+    //window.alert("Address Validate function finished for " + stepNum);
+    return addressValidated;
+};
+
+var contactValidate = function () {
+    "use strict";
+    //window.alert("Contact Validate function started for step1");
+    $("step1-tel-invalid").className = "invalid-input hide-me";
+    $("step1-email-invalid").className = "invalid-input hide-me";
+    var contactValidated = true;
+    if (!/^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$/.test($("step1-tel").value)) {
+        //window.alert("Bad Tel");
+        $("step1-tel-invalid").classList.toggle("hide-me");
+        contactValidated = false;
+    }
+
+    if (!/.+\@.+\.[com|net|edu|gov]/.test($("step1-email").value)) {
+        //window.alert("Bad Email");
+        $("step1-email-invalid").classList.toggle("hide-me");
+        contactValidated = false;
+    }
+    //window.alert("Contact Validate function finished for step1");
+    return contactValidated;
 };
 
 var step1Process = function () {
     "use strict";
-    window.alert("step1Process function exected");
-    if (step1Validate()) {
-        $("step1").innerHTML = "Return to Step 1: Enter Your Delivery Address";
+    //window.alert("step1Process function exected");
+    addressValidate("step1");
+    contactValidate();
+    if (addressValidate("step1") && contactValidate()) {
+        $("step1").classList.toggle("hide-me");
         $("step1-form").classList.toggle("hide-me");
+        $("step1Return").classList.toggle("hide-me");
         $("step2").classList.toggle("hide-me");
         $("step2-form").classList.toggle("hide-me");
         $("pizza-price").classList.toggle("hide-me");
-        
-    } else {
-        step1Validated = true;
     }
-    window.alert("step1Process function finished");
+    //window.alert("step1Process function finished");
     return false;
 };
 
-var step1AddressTypeProcess = function () {
+var AddressTypeProcess = function () {
     "use strict";
-    step1FormJSON["other-address"].required = "false";
-    $("step1-other-address-div").className = "hide-me";
-    if ($("step1-address-type").value === "Other") {
-        $("step1-other-address-div").classList.toggle("hide-me");
-        step1FormJSON["other-address"].required = "true";
+    //window.alert("addresstype process started for " + this.id);
+    otherAddress[this.id] = "false";
+    
+    //window.alert($(this.id + "-div").className);
+    $(this.id + "-div").className = "hide-me";
+    if ($(this.id).value === "Other") {
+        $(this.id + "-div").classList.toggle("hide-me");
+        otherAddress[this.id] = "true";
     }
+    //window.alert("addresstype process finished for " + this.id);
     return false;
 };
 
@@ -233,7 +134,7 @@ var crustValues =
         "Gluten Free Crust": ["10.99"]
     };
 
-var crustChoice = false, sizePrices, sizeValues, z, a;
+var crustChoice = false, sizePrices, sizeValues, finalPrice;
 
 var step2CheckCrustChoice = function () {"use strict"; if (!crustChoice) {window.alert("Please choose a crust type first"); return false; } else { return true; } };
 
@@ -252,13 +153,16 @@ var step2Validate = function () {
             parseFloat($("step2-size-choice").options[$("step2-size-choice").selectedIndex].getAttribute("price")) + parseFloat($("step2-cheese-choice").options[$("step2-cheese-choice").selectedIndex].getAttribute("price"))
             + parseFloat($("step2-sauce-choice").options[$("step2-sauce-choice").selectedIndex].getAttribute("price"));
         $("totalPrice").innerHTML = "$" + totalPrice.toFixed(2);
+        finalPrice = totalPrice;
     } else {
         $("step2-crust-type-invalid").classList.toggle("hide-me");
     }
 };
 
 var step2CrustChoiceProcess = function () {
+
     "use strict";
+    var z, a;
     crustChoice = true;
     $("crustPrice").innerHTML = this.value;
     for (a = $("step2-size-choice").length - 1; a >= 0; a -= 1) {
@@ -316,17 +220,18 @@ var step2ToppingsChoiceProcess = function () {
 
 var step2Process = function () {
     "use strict";
-    window.alert("step2Process function started");
+    //window.alert("step2Process function started");
     step2Validate();
     if (step2CheckCrustChoice()) {
         if (window.confirm("You've clicked finished building pizza, would you like proceed to payment info?")) {
-            $("step2").innerHTML = "Return to Step 2: Build Your Pizza";
+            $("step2").classList.toggle("hide-me");
             $("step2-form").classList.toggle("hide-me");
+            $("step2Return").classList.toggle("hide-me");
             $("step3").classList.toggle("hide-me");
             $("step3-form").classList.toggle("hide-me");
         }
     }
-    window.alert("step2Process function finished");
+    //window.alert("step2Process function finished");
     return false;
 };
 
@@ -337,8 +242,9 @@ var sameDeliveryProcess = function () {
         $("step3-address-type").value = $("step1-address-type").value;
         $("step3-address-1").value = $("step1-address-1").value;
         $("step3-address-2").value = $("step1-address-2").value;
+        otherAddress["step3-address-type"] = otherAddress["step1-address-type"];
         $("step3-other-address").value = $("step1-other-address").value;
-        $("step3-other-address-div").setAttribute("class", $("step1-other-address-div").getAttribute("class"));
+        $("step3-address-type-div").setAttribute("class", $("step1-address-type-div").getAttribute("class"));
         $("step3-city").value = $("step1-city").value;
         $("step3-state").value = $("step1-state").value;
         $("step3-zip").value = $("step1-zip").value;
@@ -346,23 +252,135 @@ var sameDeliveryProcess = function () {
     return false;
 };
 
+var CCCompany = "";
 
-var step3Validate = function () {
+var validateCC = function () {
     "use strict";
-    return false;
+    //window.alert("CC Validate function started for step3");
+    var CCValidated = true;
+    $("step3-credit-card-invalid").className = "invalid-input hide-me";
+    $("step3-credit-card-invalid").innerHTML = "Valid Credit Card number is required: ";
+    $("step3-expiration-month-invalid").className = "invalid-input hide-me";
+    $("step3-expiration-year-invalid").className = "invalid-input hide-me";
+    $("step3-cvc-code-invalid").className = "invalid-input hide-me";
+    
+    var d, doubleDigits = "", c, checkSum = 0,
+        CC = $("step3-credit-card").value,
+        allNum = /^[0-9]+/.test(CC),
+        VISA = /^4/.test(CC) && (CC.length === 13 || CC.length === 16),
+        MC = /^5[1-5]/.test(CC) && CC.length === 16,
+        AMEX = /^37/.test(CC) && CC.length === 15;
+    
+    if (allNum && (VISA || MC || AMEX)) {
+        for (d = 0; d < CC.length; d += 1) {
+            if (d % 2 === 0) {
+                doubleDigits = doubleDigits + (parseInt(CC[d] * 2, 10));
+            } else { doubleDigits = doubleDigits + CC[d]; }
+        }
+        //window.alert(doubleDigits);
+        for (c = 0; c < doubleDigits.length; c += 1) {
+            checkSum += parseInt(doubleDigits[c], 10);
+        }
+        if (checkSum % 10 === 0) {
+            if (VISA) { CCCompany = "VISA"; }
+            if (MC) { CCCompany = "MASTERCARD"; }
+            if (AMEX) { CCCompany = "AMERICAN EXPRESS"; }
+            //window.alert(checkSum + " passed");
+        } else {
+            CCValidated = false;
+            $("step3-credit-card-invalid").classList.toggle("hide-me");
+            $("step3-credit-card-invalid").innerHTML += "Did not pass the checksum, please Re-enter CC #";
+            //window.alert(checkSum + " failed");
+        }
+    } else {
+        CCValidated = false;
+        $("step3-credit-card-invalid").classList.toggle("hide-me");
+        $("step3-credit-card-invalid").innerHTML += "Must be all #s, start with 4, 37 or 51-55, and be 13, 15, or 16 digits long. Please Re-enter CC #";
+        //window.alert(CC + " failed precheck");
+    }
+    
+    var todayDate = new Date();
+    var expirationMonth = $("step3-expiration-month").options[$("step3-expiration-month").selectedIndex].value;
+    var expirationYear = $("step3-expiration-year").options[$("step3-expiration-year").selectedIndex].value;
+    var expirationDate = new Date(expirationYear, expirationMonth);
+    
+    //window.alert(expirationMonth);
+    //window.alert(expirationYear);
+    //window.alert(todayDate);
+    //window.alert(expirationDate);
+
+    
+    if (expirationMonth === "" || expirationYear === "" || todayDate > expirationDate) {
+        //window.alert("Bad Expirate Date");
+        $("step3-expiration-month-invalid").classList.toggle("hide-me");
+        $("step3-expiration-year-invalid").classList.toggle("hide-me");
+        CCValidated = false;
+    }
+
+    if (!/^[0-9][0-9][0-9]$/.test($("step3-cvc-code").value)) {
+        //window.alert("Bad CVC");
+        $("step3-cvc-code-invalid").classList.toggle("hide-me");
+        CCValidated = false;
+    }
+    //window.alert("CC Validate function finished for step3");
+    return CCValidated;
 };
 
 var step3Process = function () {
     "use strict";
-    step3Validate();
+    //window.alert("step3process function started");
+    addressValidate("step3");
+    validateCC();
+    if (addressValidate("step3") && validateCC()) {
+        $("step3").classList.toggle("hide-me");
+        $("step3-form").classList.toggle("hide-me");
+        $("step3Return").classList.toggle("hide-me");
+        //window.alert($("step4").innerHTML);
+        var msg = "Your " + CCCompany + " card has successfully been charged $" + finalPrice + ". 1-2-3 Pizza is on it's way!";
+        window.alert("Your " + CCCompany + " card has successfully been charged $" + finalPrice + ". 1-2-3 Pizza is on it's way!");
+    }
+    //window.alert("step3process function finished");
+    return false;
+};
+
+var step1Return = function () {
+    "use strict";
+    $("step1Return").className = "hide-me";
+    $("step2Return").className = "hide-me";
+    $("step3Return").className = "hide-me";
+    $("step1").className = "";
+    $("step2").className = "hide-me";
+    $("step3").className = "hide-me";
+    $("step1-form").className = "needs-validation";
+    $("step2-form").className = "needs-validation hide-me";
+    $("pizza-price").className = "hide-me";
+    $("step3-form").className = "needs-validation hide-me";
+    return false;
+};
+var step2Return = function () {
+    "use strict";
+    $("step2Return").className = "hide-me";
+    $("step3Return").className = "hide-me";
+    $("step2").className = "";
+    $("step3").className = "hide-me";
+    $("step2-form").className = "needs-validation";
+    $("pizza-price").className = "";
+    $("step3-form").className = "needs-validation hide-me";
+    return false;
+};
+var step3Return = function () {
+    "use strict";
+    $("step3Return").className = "hide-me";
+    $("step3").className = "";
+    $("step3-form").className = "needs-validation";
     return false;
 };
 
 var init = function () {
     "use strict";
-    window.alert("init function exected");
+    //window.alert("init function exected");
     $("step1-btn").onclick = step1Process;
-    $("step1-address-type").onchange = step1AddressTypeProcess;
+    $("step1-address-type").onchange = AddressTypeProcess;
     $("step2-btn").onclick = step2Process;
     $("step2-hand-tossed").onchange = step2CrustChoiceProcess;
     $("step2-thin").onchange = step2CrustChoiceProcess;
@@ -386,9 +404,12 @@ var init = function () {
     $("step2").classList.toggle("hide-me");
     $("step2-form").classList.toggle("hide-me");
     $("pizza-price").classList.toggle("hide-me");
-    //$("step3").classList.toggle("hide-me");
-   // $("step3-form").classList.toggle("hide-me");
-    window.alert("init function finished");
+    $("step3").classList.toggle("hide-me");
+    $("step3-form").classList.toggle("hide-me");
+    $("step1Return").onclick = step1Return;
+    $("step2Return").onclick = step2Return;
+    $("step3Return").onclick = step3Return;
+    //window.alert("init function finished");
 };
 
 window.onload = init;
